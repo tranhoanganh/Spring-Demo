@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Add Product</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <!--css-->
+    <link th:href="@{/css/bootstrap.css}" rel="stylesheet" />
+
+    <!--js-->
+    <script th:src="@{/js/min.js}"></script>
+
+</head>
+<body>
+
+<!--Lưu ý: Đối tượng product được khởi tạo ở hàm GetRequest trong WebController-->
+<form class="form-horizontal" th:action="@{/addproduct}" th:object="${product}" method="post">
+    <p>Name: <input type="text" class="form-control" th:field="*{name}" /></p> <!-- Tương đương ${product.name} -->
+    <p>Name: <input type="text" class="form-control" th:field="*{price}" /></p> <!-- Tương đương ${product.price} -->
+    <p> <button type="submit" >Add</button></p>
+</form>
+
+</body>
+
+</html>

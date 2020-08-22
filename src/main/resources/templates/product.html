@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Home</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <!--css-->
+    <link th:href="@{/css/bootstrap.css}" rel="stylesheet" />
+    <link th:href="@{/css/style.css}" rel="stylesheet" />
+
+    <!--js-->
+    <script th:src="@{/js/min.js}"></script>
+
+</head>
+<body>
+<h1 th:text="${product}"></h1>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Category</th>
+    </tr>
+
+    <tr th:each="p: ${products}">
+        <td th:text="${p.id}">id</td>
+        <td th:text="${p.name}">name</td>
+        <td th:text="${p.price}">price</td>
+        <td th:text="${p.quantity}">quantity</td>
+        <td th:text="${p.category.name}">category name</td>
+    </tr>
+</table>
+
+<br />
+
+<a th:href="@{/addproduct}">+ Thêm Product</a>
+
+
+</body>
+
+</html>
