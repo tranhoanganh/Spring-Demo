@@ -20,7 +20,7 @@ import java.util.List;
 @Table(name = "product")
 public class ProductEntity extends BaseEntity {
 
-    @Column(name = "categoryid", insertable = false, updatable = false)
+    @Column(name = "categoryid")
     private Integer categoryid;
 
     @Column(name = "name")
@@ -32,18 +32,15 @@ public class ProductEntity extends BaseEntity {
     @Column(name = "quantity")
     private Integer quantity;
 
-
-    //Cascade: Khi một bản ghi thay đổi thì nó sẽ tự động update các bản ghi đang tham chiếu tới nó.
-    //cascade = {CascadeType.REMOVE, CascadeType.PERSIST}
-    //CascadeType.REMOVE: khi xóa category thì các product liên quan cũng bị xóa
-    //Khi insert category thì các product bên trong nó cũng được tự động insert
-
-
-    @ManyToOne(cascade = CascadeType.PERSIST) //EAGER
-    @JoinColumn(name = "categoryid")
+    @ManyToOne() //EAGER
+    @JoinColumn(name = "categoryid", insertable = false, updatable = false)
     private CategoryEntity category;
 
-    @ManyToMany(cascade = CascadeType.PERSIST)
+    //cascade = {CascadeType.REMOVE, CascadeType.PERSIST, CascadeType.MERGE}
+    //CascadeType.REMOVE: khi xóa thì các data liên quan cũng bị xóa
+    //CascadeType.PERSIST: Khi insert listAttribute thì tạo mới luôn các Attribute
+    //CascadeType.MERGE: Khi insert listAttribute, nếu truyền thêm param Attribute id thì update không tạo mới các Attribute
+    @ManyToMany(cascade = {CascadeType.MERGE})
     @JoinTable(name = "product_attribute",
             joinColumns = @JoinColumn(name = "product_id"),
             inverseJoinColumns = @JoinColumn(name = "attribute_id")
@@ -51,3 +48,23 @@ public class ProductEntity extends BaseEntity {
     private List<AttributeEntity> listAttribute;
 
 }
+/* Request mẫu dùng MERGE,
+// Nếu dùng PERSIST thì bỏ id trong listAttribute
+{
+        "name": "Note 11",
+        "price": 1000,
+        "quantity": 10,
+        "categoryid":2,
+        "listAttribute": [
+        {
+            "id": 4,
+            "name":"Size L"
+        },
+        {
+            "id": 5,
+            "name":"Size XL"
+        }
+        ]
+        }
+
+ */
