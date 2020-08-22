@@ -1,0 +1,21 @@
+
+//POST: http://localhost:8081/api/product
+//Request:
+{
+  "name": "Note 10",
+  "price": 1000,
+  "quantity": 10,
+  "category": {
+    "name":"Samsung",
+    "code":"samsung",
+    "url":"samsung"
+  },
+  "listAttribute": [
+    {
+      "name":"Size L"
+    },
+    {
+      "name":"Size XL"
+    }
+  ]
+}

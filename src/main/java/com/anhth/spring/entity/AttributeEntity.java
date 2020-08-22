@@ -25,6 +25,7 @@ public class AttributeEntity {
     @Column(name = "name")
     private String name;
 
+    @JsonIgnore
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "listAttribute", cascade = CascadeType.PERSIST)
     List<ProductEntity> listProduct;
 }

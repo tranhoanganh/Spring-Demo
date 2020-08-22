@@ -39,7 +39,6 @@ public class ProductController {
         return res;
     }
 
-    //Sử dụng cách này khi gọi api không truyền param sẽ lỗi
 //    @GetMapping
 //    public ResponseDTO getAll(@Param("page") int page, @Param("limit") int limit) {
 //        ResponseDTO res = new ResponseDTO();
